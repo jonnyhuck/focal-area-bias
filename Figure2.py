@@ -104,53 +104,53 @@ my_ax[0].legend(['Zonal Assumption', 'Focal Assumption'], loc='lower right')
 
 ''' FIGURE B & C '''
 
-# # add 1:1 lines
-# my_ax[1].plot(x, x, color='#000', linewidth=3, alpha=0.67, linestyle=(5, (10, 3)))
-# my_ax[2].plot(x, x, color='#000', linewidth=3, alpha=0.67, linestyle=(5, (10, 3)))
+# add 1:1 lines
+my_ax[1].plot(x, x, color='#000', linewidth=3, alpha=0.67, linestyle=(5, (10, 3)))
+my_ax[2].plot(x, x, color='#000', linewidth=3, alpha=0.67, linestyle=(5, (10, 3)))
 
-# # loop through each pair of functions
-# for f1, f2, colour in [
-#     (idw, fab_idw, '#1b9e77'), 
-#     (idw2, fab_idw2, '#d95f02'), 
-#     (gauss, fab_gauss, '#7570b3')
-#     ]:
+# loop through each pair of functions
+for f1, f2, colour in [
+    (idw, fab_idw, '#1b9e77'), 
+    (idw2, fab_idw2, '#d95f02'), 
+    (gauss, fab_gauss, '#7570b3')
+    ]:
 
-#     # init
-#     x = [0]
-#     uncorrected = [0]
-#     corrected = [0]
+    # init
+    x = [0]
+    uncorrected = [0]
+    corrected = [0]
 
-#     # increment 0.1-1 in 0.1 increments
-#     for inner_proportion in array(range(1, 51, 1)) / 50:
+    # increment 0.1-1 in 0.1 increments
+    for inner_proportion in array(range(1, 51, 1)) / 50:
 
-#         # record x value
-#         x.append(inner_proportion)
+        # record x value
+        x.append(inner_proportion)
 
-#         # refresh landscape for uncorrected and corrected versions
-#         uc_surf = landscape_bk.copy()
-#         c_surf = landscape_bk.copy()
+        # refresh landscape for uncorrected and corrected versions
+        uc_surf = landscape_bk.copy()
+        c_surf = landscape_bk.copy()
 
-#         # calculate inner ring
-#         inner = disk(centre, radius * inner_proportion)
+        # calculate inner ring
+        inner = disk(centre, radius * inner_proportion)
 
-#         # now apply weighting to entire disk
-#         for r, c in column_stack(outer):
-#             dist = hypot(c - centre[1], r - centre[0])
+        # now apply weighting to entire disk
+        for r, c in column_stack(outer):
+            dist = hypot(c - centre[1], r - centre[0])
 
-#             # apply uncorrected weighting
-#             if f1 is not None:
-#                 uc_surf[(r,c)] = f1(dist, radius)
+            # apply uncorrected weighting
+            if f1 is not None:
+                uc_surf[(r,c)] = f1(dist, radius)
                 
-#             # apply corrected weighting
-#             c_surf[(r,c)] = f2(dist, radius)
+            # apply corrected weighting
+            c_surf[(r,c)] = f2(dist, radius)
 
-#         # mean value
-#         uncorrected.append(sum(uc_surf[inner]) / sum(uc_surf[outer]))
-#         corrected.append(sum(c_surf[inner]) / sum(c_surf[outer]))
+        # mean value
+        uncorrected.append(sum(uc_surf[inner]) / sum(uc_surf[outer]))
+        corrected.append(sum(c_surf[inner]) / sum(c_surf[outer]))
         
-#     # add results from each function
-#     my_ax[1].plot(x, uncorrected, linewidth=3, color=colour)    
-#     my_ax[2].plot(x, corrected, linewidth=3, color=colour)
+    # add results from each function
+    my_ax[1].plot(x, uncorrected, linewidth=3, color=colour)    
+    my_ax[2].plot(x, corrected, linewidth=3, color=colour)
 
 # add labels
 my_ax[1].legend(['$IDW$', '$IDW^2$', '$Gaussian$ $(σ=1)$','$Unweighted$'], loc='lower right')
@@ -183,4 +183,4 @@ my_ax[2].set_title('C. GW with Focal Assumption')
 subplots_adjust(wspace=0.2)
 
 # output plots
-savefig("Figure2.png", bbox_inches='tight')
+savefig("Figure2.png", bbox_inches='tight', dpi=300)

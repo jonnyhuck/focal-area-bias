@@ -190,4 +190,4 @@ for WEIGHT in [2, 0, 1]:
         my_ax[srow][splt].set_ylim(ylim)
 
 # write to file
-savefig("Figure4_10000.png", bbox_inches='tight')
+savefig("Figure3.png", bbox_inches='tight', dpi=300)

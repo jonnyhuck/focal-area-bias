@@ -135,5 +135,5 @@ my_ax[1].annotate('B',
         fontsize='large', verticalalignment='top', fontfamily='sans serif')
 
 # save the result
-savefig('./Figure1.png', bbox_inches='tight')
+savefig('./Figure1.png', bbox_inches='tight', dpi=300)
 print("done!")

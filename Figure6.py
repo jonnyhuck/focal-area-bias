@@ -91,4 +91,4 @@ my_ax[1].annotate('B. 250 cell radius',
 subplots_adjust(wspace=0.15)
 
 # output
-savefig(f"Figure7.png", bbox_inches='tight')
+savefig(f"Figure7.png", bbox_inches='tight', dpi=300)
